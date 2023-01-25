@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { antDesign } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
 
 const ProductCard = ({ image, category, title, price, description }) => {
@@ -15,11 +15,42 @@ const ProductCard = ({ image, category, title, price, description }) => {
           style={{ resizeMode: 'contain' }}
         />
       </View>
-      <View>
-        <Text>{category}</Text>
-        <Text>{title}</Text>
-        <Text>{description}</Text>
-        <Text>{price}</Text>
+      <View className='mt-5 '>
+        <Text className='text-sm text-black/60 dark:text-white/70 '>
+          {category}
+        </Text>
+        <Text className='text-lg font-semibold  dark:text-white '>{title}</Text>
+        <View className='flex-row justify-between my-3 '>
+          <View className='flex-row gap-3 items-center '>
+            <AntDesign
+              name='minuscircleo'
+              size={24}
+              color={colorScheme === 'dark' ? 'white' : 'black'}
+              onPress={() => setCount(count - 1)}
+            ></AntDesign>
+            <Text className='text-xl dark:text-white '>{count}</Text>
+            <AntDesign
+              name='pluscircleo'
+              size={24}
+              color={colorScheme === 'dark' ? 'white' : 'black'}
+              onPress={() => setCount(count + 1)}
+            ></AntDesign>
+          </View>
+          <Text className='text-2xl font-extrabold dark:text-white '>
+            ${price * count}
+          </Text>
+        </View>
+        <Text
+          numberOfLines={2}
+          className='text-sm text-black/60 dark:text-white/70 '
+        >
+          {description}
+        </Text>
+        <TouchableOpacity className='bg-black dark:bg-white p-3  rounded-full flex-row justify-center w-10/12 self-center mt-5 '>
+          <Text className='text-white dark:text-black font-bold '>
+            Add To Cart
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
